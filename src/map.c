@@ -1,4 +1,4 @@
-#include <ncurses.h>
+#include "screen.h"
 #include "map.h"
 
 // All areas of the planet. Every row has exactly MAP_WIDTH characters.
@@ -92,7 +92,7 @@ void map_init_colors(void)
     init_pair(COLOR_CHROMATIC,  COLOR_GREEN,   -1);
     init_pair(COLOR_STATION,    COLOR_CYAN,    -1);
     init_pair(COLOR_ATLAS,      COLOR_MAGENTA, -1);
-    init_pair(COLOR_PLAYER,     COLOR_WHITE,   -1);
+    init_pair(COLOR_PLAYER,     COLOR_MAGENTA,   -1);
 }
 
 // Copy all areas into the map we use during the game.
@@ -180,7 +180,7 @@ static void draw_tile(int row, int col, char tile)
     if (tile == TILE_GROUND) {
         mvaddch(row, col, ' ');
     } else if (tile == TILE_ROCK) {
-        mvaddch(row, col, ACS_CKBOARD);
+        mvaddch(row, col, TILE_ROCK);
     } else {
         attron(COLOR_PAIR(color) | A_BOLD);
         mvaddch(row, col, tile);

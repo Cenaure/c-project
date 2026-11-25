@@ -1,5 +1,4 @@
-#ifndef MAP_H
-#define MAP_H
+#pragma once
 
 // Size of one area
 #define MAP_WIDTH  40
@@ -46,5 +45,3 @@ void map_set_tile(int x, int y, char tile);
 int map_is_walkable(int x, int y);
 void map_draw(void);
 void map_draw_legend(int row);
-
-#endif

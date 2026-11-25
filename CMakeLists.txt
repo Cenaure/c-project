@@ -11,4 +11,9 @@ add_executable(c_proj
         src/shop.c
 )
 
-target_link_libraries(c_proj ncurses)
+# ncurses appeared to not be in windows :(
+if(WIN32)
+    target_link_libraries(c_proj pdcurses)
+else()
+    target_link_libraries(c_proj ncurses)
+endif()

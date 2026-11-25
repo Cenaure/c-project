@@ -1,4 +1,4 @@
-#include <ncurses.h>
+#include "screen.h"
 #include "inventory.h"
 
 const Item items[ITEM_COUNT] = {

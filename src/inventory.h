@@ -1,5 +1,4 @@
-#ifndef INVENTORY_H
-#define INVENTORY_H
+#pragma once
 
 // Item types
 #define TYPE_RESOURCE   0
@@ -44,5 +43,3 @@ void inventory_init(Inventory *inv);
 void inventory_add(Inventory *inv, int item, int amount);
 int inventory_remove(Inventory *inv, int item, int amount);
 void inventory_show(Inventory *inv, int units);
-
-#endif

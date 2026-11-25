@@ -1,4 +1,4 @@
-#include <ncurses.h>
+#include "screen.h"
 #include <locale.h>
 #include <string.h>
 #include "map.h"
