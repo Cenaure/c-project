@@ -7,7 +7,7 @@ typedef struct {
     int y;
     int hp;
     int max_hp;
-    int units; // money
+    int units; // no man's sky money
     Inventory inv;
 } Player;
 

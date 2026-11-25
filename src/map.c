@@ -6,7 +6,7 @@
 static const char planet[AREA_COUNT][MAP_HEIGHT][MAP_WIDTH + 1] = {
     { // 0: Landing Site
         "...c..........##.................f......",
-        "..............##......c.................",
+        "....X.........##......c.................",
         "..S.......................###...........",
         "............c.............###.....n.....",
         "....###.................................",
@@ -93,6 +93,7 @@ void map_init_colors(void)
     init_pair(COLOR_STATION,    COLOR_CYAN,    -1);
     init_pair(COLOR_ATLAS,      COLOR_MAGENTA, -1);
     init_pair(COLOR_PLAYER,     COLOR_MAGENTA,   -1);
+    init_pair(COLOR_SHIP,       COLOR_WHITE,   COLOR_RED);
 }
 
 // Copy all areas into the map we use during the game.
@@ -169,6 +170,7 @@ static int tile_color(char tile)
     if (tile == TILE_CHROMATIC)  return COLOR_CHROMATIC;
     if (tile == TILE_STATION)    return COLOR_STATION;
     if (tile == TILE_ATLAS)      return COLOR_ATLAS;
+    if (tile == TILE_SHIP)       return COLOR_SHIP;
     return 0;
 }
 

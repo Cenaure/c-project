@@ -9,6 +9,7 @@ add_executable(c_proj
         src/player.c
         src/inventory.c
         src/shop.c
+        src/quest.c
 )
 
 # ncurses appeared to not be in windows :(

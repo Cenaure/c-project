@@ -17,6 +17,7 @@
 #define TILE_ROCK    '#'
 #define TILE_STATION 'S'
 #define TILE_ATLAS   'A'
+#define TILE_SHIP    'X'
 
 // Resource tiles, mined by walking on them
 #define TILE_CARBON     'c'
@@ -34,6 +35,7 @@
 #define COLOR_STATION    6
 #define COLOR_ATLAS      7
 #define COLOR_PLAYER     8
+#define COLOR_SHIP       9
 
 void map_init_colors(void);
 void map_load(void);
