@@ -6,6 +6,7 @@
 #include "inventory.h"
 #include "shop.h"
 #include "quest.h"
+#include "menu.h"
 
 // Show player info and the last message below the map.
 void draw_status(Player *player, char *message)
@@ -48,6 +49,11 @@ int main(void)
     keypad(stdscr, TRUE);  // allow arrow keys
     curs_set(0);           // hide the cursor
     map_init_colors();
+
+    if (menu_show() == MENU_QUIT) {
+        endwin();
+        return 0;
+    }
 
     map_load();
     player_init(&player);
