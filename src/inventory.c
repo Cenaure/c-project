@@ -7,19 +7,11 @@ const Item items[ITEM_COUNT] = {
     {"Sodium",            TYPE_RESOURCE,   20},
     {"Di-hydrogen",       TYPE_RESOURCE,   25},
     {"Chromatic Metal",   TYPE_RESOURCE,   40},
-    {"Life Support Gel",  TYPE_CONSUMABLE, 50},
-    {"Shield Battery",    TYPE_CONSUMABLE, 60},
-    {"Ion Battery",       TYPE_CONSUMABLE, 70},
-    {"Repair Kit",        TYPE_CONSUMABLE, 90},
-    {"Nanite Cluster",    TYPE_CONSUMABLE, 120},
-    {"Hyperdrive Core",   TYPE_TECH,       800},
     {"Launch Thruster",   TYPE_TECH,       500},
-    {"Atlas Seed",        TYPE_TECH,       1000},
-    {"Gravitino Ball",    TYPE_TECH,       300},
-    {"Vortex Cube",       TYPE_TECH,       400}
+    {"Atlas Seed",        TYPE_TECH,       1000}
 };
 
-static const char *type_names[3] = {"RESOURCES", "CONSUMABLES", "TECH & CURIOSITIES"};
+static const char *type_names[TYPE_COUNT] = {"RESOURCES", "TECH"};
 
 void inventory_init(Inventory *inv)
 {
@@ -54,7 +46,7 @@ void inventory_show(Inventory *inv, int units)
     clear();
     mvprintw(0, 0, "=== EXOSUIT INVENTORY ===   Units: %d", units);
 
-    for (type = 0; type < 3; type++) {
+    for (type = 0; type < TYPE_COUNT; type++) {
         mvprintw(row, 0, "%s", type_names[type]);
         row++;
         for (i = 0; i < ITEM_COUNT; i++) {

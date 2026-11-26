@@ -3,6 +3,7 @@
 #include "quest.h"
 #include "inventory.h"
 #include "dialog.h"
+#include "atlas.h"
 
 static Quest quests[QUEST_COUNT] = {
     {"Repair your starship",
@@ -10,6 +11,9 @@ static Quest quests[QUEST_COUNT] = {
      QUEST_NOT_STARTED},
     {"The Gek's Request",
      "A Gek in the Sodium Fields wants something. Learn its words from stones (K).",
+     QUEST_NOT_STARTED},
+    {"The Atlas Path",
+     "A red sphere in the Atlas Ruins says you were here 16 times before.",
      QUEST_NOT_STARTED}
 };
 
@@ -104,6 +108,17 @@ void quest_show(Player *player)
 
     if (quests[QUEST_GEK].status == QUEST_ACTIVE) {
         mvprintw(row, 0, "Gek words learned: %d/%d", dialog_known_count(), WORD_COUNT);
+        row += 2;
+    }
+
+    // Next step of the Atlas story
+    if (quests[QUEST_ATLAS].status == QUEST_ACTIVE) {
+        if (player->inv.count[ITEM_ATLAS_SEED] == 0) {
+            mvprintw(row, 0, "Bring Chromatic Metal to the Atlas: %d/%d",
+                     player->inv.count[ITEM_CHROMATIC], ATLAS_METAL_AMOUNT);
+        } else {
+            mvprintw(row, 0, "Take the Atlas Seed to your repaired starship.");
+        }
         row++;
     }
 

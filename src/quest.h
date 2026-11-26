@@ -5,8 +5,9 @@
 // Quest numbers
 #define QUEST_REPAIR_SHIP 0
 #define QUEST_GEK         1
+#define QUEST_ATLAS       2
 
-#define QUEST_COUNT 2
+#define QUEST_COUNT 3
 
 // Quest status
 #define QUEST_NOT_STARTED 0

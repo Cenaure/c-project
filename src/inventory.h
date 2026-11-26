@@ -1,9 +1,10 @@
 #pragma once
 
 // Item types
-#define TYPE_RESOURCE   0
-#define TYPE_CONSUMABLE 1
-#define TYPE_TECH       2
+#define TYPE_RESOURCE 0
+#define TYPE_TECH     1
+
+#define TYPE_COUNT 2
 
 // Resources (mined from tiles)
 #define ITEM_CARBON      0
@@ -11,20 +12,11 @@
 #define ITEM_SODIUM      2
 #define ITEM_DIHYDROGEN  3
 #define ITEM_CHROMATIC   4
-// Consumables
-#define ITEM_LIFE_GEL    5
-#define ITEM_SHIELD_BAT  6
-#define ITEM_ION_BAT     7
-#define ITEM_REPAIR_KIT  8
-#define ITEM_NANITES     9
-// Tech and curiosities
-#define ITEM_HYPERDRIVE  10
-#define ITEM_THRUSTER    11
-#define ITEM_ATLAS_SEED  12
-#define ITEM_GRAVITINO   13
-#define ITEM_VORTEX_CUBE 14
+// Tech, used by quests
+#define ITEM_THRUSTER    5
+#define ITEM_ATLAS_SEED  6
 
-#define ITEM_COUNT 15
+#define ITEM_COUNT 7
 
 typedef struct {
     const char *name;

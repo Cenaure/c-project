@@ -8,6 +8,7 @@
 #include "quest.h"
 #include "menu.h"
 #include "dialog.h"
+#include "atlas.h"
 
 // Show player info and the last message below the map.
 void draw_status(Player *player, char *message)
@@ -15,13 +16,12 @@ void draw_status(Player *player, char *message)
     char tile = map_get_tile(player->x, player->y);
 
     // The map with its border takes rows 0 to MAP_HEIGHT + 1
-    mvprintw(MAP_HEIGHT + 3, 0, "HP: %d/%d   Units: %d   Position: %d,%d",
-             player->hp, player->max_hp, player->units, player->x, player->y);
+    mvprintw(MAP_HEIGHT + 3, 0, "Units: %d   Position: %d,%d", player->units, player->x, player->y);
 
     if (tile == TILE_STATION) {
         mvprintw(MAP_HEIGHT + 4, 0, "You found a Space Station. Press E to trade.");
-    } else if (tile == TILE_ATLAS) {
-        mvprintw(MAP_HEIGHT + 4, 0, "The Atlas Interface hums in front of you...");
+    } else if (tile == TILE_ATLAS && strcmp(message, "") == 0) {
+        mvprintw(MAP_HEIGHT + 4, 0, "The Atlas Interface hums in front of you. Press E.");
     } else if (tile == TILE_STONE) {
         mvprintw(MAP_HEIGHT + 4, 0, "An ancient Knowledge Stone. Press E to read it.");
     } else if (tile == TILE_GEK) {
@@ -91,7 +91,13 @@ int main(void)
             if (map_get_tile(player.x, player.y) == TILE_STATION) {
                 shop_open(&player);
             } else if (map_get_tile(player.x, player.y) == TILE_SHIP) {
-                quest_repair_ship(&player, message);
+                if (atlas_try_ending(&player)) {
+                    running = 0; // the story is over, end the game
+                } else {
+                    quest_repair_ship(&player, message);
+                }
+            } else if (map_get_tile(player.x, player.y) == TILE_ATLAS) {
+                atlas_talk(&player, message);
             } else if (map_get_tile(player.x, player.y) == TILE_STONE) {
                 dialog_read_stone(message);
                 map_set_tile(player.x, player.y, TILE_GROUND); // each stone works once

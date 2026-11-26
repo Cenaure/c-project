@@ -7,12 +7,9 @@ void player_init(Player *player)
 {
     player->x = 0;
     player->y = 0;
-    player->max_hp = 100;
-    player->hp = 100;
     player->units = 200;
 
     inventory_init(&player->inv);
-    inventory_add(&player->inv, ITEM_LIFE_GEL, 1);
 }
 
 void player_move(Player *player, int dx, int dy)

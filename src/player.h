@@ -5,8 +5,6 @@
 typedef struct {
     int x;
     int y;
-    int hp;
-    int max_hp;
     int units; // no man's sky money
     Inventory inv;
 } Player;
