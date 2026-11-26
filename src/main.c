@@ -7,6 +7,7 @@
 #include "shop.h"
 #include "quest.h"
 #include "menu.h"
+#include "dialog.h"
 
 // Show player info and the last message below the map.
 void draw_status(Player *player, char *message)
@@ -21,6 +22,10 @@ void draw_status(Player *player, char *message)
         mvprintw(MAP_HEIGHT + 4, 0, "You found a Space Station. Press E to trade.");
     } else if (tile == TILE_ATLAS) {
         mvprintw(MAP_HEIGHT + 4, 0, "The Atlas Interface hums in front of you...");
+    } else if (tile == TILE_STONE) {
+        mvprintw(MAP_HEIGHT + 4, 0, "An ancient Knowledge Stone. Press E to read it.");
+    } else if (tile == TILE_GEK) {
+        mvprintw(MAP_HEIGHT + 4, 0, "A Gek looks at you. Press E to talk.");
     } else if (tile == TILE_SHIP && strcmp(message, "") == 0) {
         if (quest_get_status(QUEST_REPAIR_SHIP) == QUEST_DONE) {
             mvprintw(MAP_HEIGHT + 4, 0, "Your starship, repaired and ready to fly.");
@@ -32,7 +37,7 @@ void draw_status(Player *player, char *message)
     }
 
     map_draw_legend(MAP_HEIGHT + 6);
-    mvprintw(MAP_HEIGHT + 7, 0, "Move: WASD/arrows   E interact   I inventory   J quests   Q quit");
+    mvprintw(MAP_HEIGHT + 8, 0, "Move: WASD/arrows   E interact   I inventory   J quests   Q quit");
 }
 
 int main(void)
@@ -58,6 +63,7 @@ int main(void)
     map_load();
     player_init(&player);
     quest_init();
+    dialog_init();
 
     while (running) {
         clear();
@@ -86,6 +92,11 @@ int main(void)
                 shop_open(&player);
             } else if (map_get_tile(player.x, player.y) == TILE_SHIP) {
                 quest_repair_ship(&player, message);
+            } else if (map_get_tile(player.x, player.y) == TILE_STONE) {
+                dialog_read_stone(message);
+                map_set_tile(player.x, player.y, TILE_GROUND); // each stone works once
+            } else if (map_get_tile(player.x, player.y) == TILE_GEK) {
+                dialog_talk_gek(&player);
             }
         } else if (key == 'q') {
             running = 0;

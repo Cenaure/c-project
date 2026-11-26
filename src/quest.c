@@ -2,10 +2,14 @@
 #include <stdio.h>
 #include "quest.h"
 #include "inventory.h"
+#include "dialog.h"
 
 static Quest quests[QUEST_COUNT] = {
     {"Repair your starship",
      "Your ship crashed at the Landing Site. Gather materials or buy them at the space station to fix it.",
+     QUEST_NOT_STARTED},
+    {"The Gek's Request",
+     "A Gek in the Sodium Fields wants something. Learn its words from stones (K).",
      QUEST_NOT_STARTED}
 };
 
@@ -26,6 +30,11 @@ void quest_init(void)
 int quest_get_status(int quest)
 {
     return quests[quest].status;
+}
+
+void quest_set_status(int quest, int status)
+{
+    quests[quest].status = status;
 }
 
 // Called when the player presses E on the ship tile.
@@ -70,6 +79,10 @@ void quest_show(Player *player)
     mvprintw(0, 0, "=== QUEST LOG ===");
 
     for (i = 0; i < QUEST_COUNT; i++) {
+        // Quests the player hasn't found yet stay hidden
+        if (quests[i].status == QUEST_NOT_STARTED) {
+            continue;
+        }
         mvprintw(row, 0, "%s [%s]", quests[i].title, statuses[quests[i].status]);
         mvprintw(row + 1, 2, "%s", quests[i].description);
         row += 3;
@@ -86,6 +99,11 @@ void quest_show(Player *player)
             row++;
         }
         mvprintw(row, 0, "Go to your ship and press E to repair it.");
+        row += 2;
+    }
+
+    if (quests[QUEST_GEK].status == QUEST_ACTIVE) {
+        mvprintw(row, 0, "Gek words learned: %d/%d", dialog_known_count(), WORD_COUNT);
         row++;
     }
 

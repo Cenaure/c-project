@@ -18,6 +18,8 @@
 #define TILE_STATION 'S'
 #define TILE_ATLAS   'A'
 #define TILE_SHIP    'X'
+#define TILE_STONE   'K' // Knowledge Stone, teaches a Gek word
+#define TILE_GEK     'G' // a Gek alien you can talk to
 
 // Resource tiles, mined by walking on them
 #define TILE_CARBON     'c'
@@ -36,6 +38,8 @@
 #define COLOR_ATLAS      7
 #define COLOR_PLAYER     8
 #define COLOR_SHIP       9
+#define COLOR_STONE      10
+#define COLOR_GEK        11
 
 void map_init_colors(void);
 void map_load(void);
